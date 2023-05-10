@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Data Penjualan - 2100016086</title>
+</head>
+<body>
+  <h2>Dharu Aulia Rahman (2100016086)</h2>
+  <div id="chart"></div>
+
+  <!-- Masukkan kode JavaScript Anda di sini -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    // Masukkan kode JavaScript Anda di sini
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+    var queryString = encodeURIComponent('SELECT *');
+    var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1hp89vN9ZZNGTmJXcibI1WHcMpIZXI5SQcNG3skCEhHk/gviz/tq?tq=' + queryString);
+
+    query.send(function(response) {
+    if (response.isError()) {
+      console.log('Terjadi kesalahan saat memuat data: ' + response.getMessage());
+      return;
+    }
+
+    var data = response.getDataTable();
+
+    var options = {
+      title: 'Data Penjualan di Beberapa Wilayah',
+      curveType: 'function',
+      legend: { position: 'bottom' },
+      width: 1000,
+      height: 500
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+
+    chart.draw(data, options);
+    });
+    }
+   </script>
+</body>
+</html>
